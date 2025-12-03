@@ -24,22 +24,12 @@ public:
     
     // Crée une grille aléatoire avec une densité donnée
     static Grid* createRandom(int width, int height, double density, bool toric);
-    
-    // Crée une grille avec un pattern prédéfini
-    static Grid* createFromPattern(int width, int height, 
-                                    const string& patternName, 
-                                    bool toric);
 
 private:
     // Méthode helper pour initialiser la matrice de cellules
     static vector<vector<CellState*>> initializeCells(
         int width, int height, 
         const vector<vector<int>>& data);
-    
-    // Patterns prédéfinis
-    static vector<vector<int>> getGliderPattern();
-    static vector<vector<int>> getBlinkerPattern();
-    static vector<vector<int>> getGliderGunPattern();
 };
 
 #endif

@@ -63,17 +63,17 @@ void GridToric::updateCell(int x, int y, Rules* rules) {
 }
 Grid* GridToric::clone() {
     vector<vector<CellState*>> newCells(height);
-    for (size_t y = 0; y < height; y++) {
+    for (int y = 0; y < height; y++) {
         newCells[y].resize(width);
-        for (size_t x = 0; x < width; x++) {
+        for (int x = 0; x < width; x++) {
             newCells[y][x] = cells[y][x]->clone();
         }
     }
     return new GridToric(width, height, newCells);
 }
 void GridToric::clear() {
-    for (size_t y = 0; y < height; y++) {
-        for (size_t x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
             delete cells[y][x];
         }
     }

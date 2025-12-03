@@ -40,9 +40,11 @@ void Game::nextGeneration() {
 
             // Mettre à jour la nouvelle grille
             if (newCell != currentCell) {
-                delete nextGrid->getCellule(x, y);
-                nextGrid->setCellule(x, y, newCell->clone());
-                delete newCell;
+                delete nextGrid->getCellule(x, y);   // ok, nextGrid a été cloné
+                nextGrid->setCellule(x, y, newCell); // transfer ownership
+                // ne pas delete newCell ici
+            } else {
+                delete newCell; // clone() peut retourner un clone identique
             }
         }
     }

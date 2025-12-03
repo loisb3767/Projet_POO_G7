@@ -2,9 +2,11 @@
 #define AFFICHAGEGRAPHIQUE_H
 
 #include "Affichage.h"
+#include "Grid.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
-class Grille;
+class Grid;
 
 class AffichageGraphique: public Affichage{
     private:
@@ -13,15 +15,16 @@ class AffichageGraphique: public Affichage{
         sf::Color couleurMort;
         //sf::Color couleurImmortel;
         sf::RenderWindow* fenetre;
+        Grid* grille;
     public:
         AffichageGraphique(int taille);
-        void render(Grille* grille) override;
+        void setGrid(Grid* grille);
+        void render(Grid* grille) override;
         void clear() override;    
         void init() override;
         void close() override;
         bool handleInput() override;
-        bool estOuvert() const;
-        void onCellClick(int x, int y);
+        bool estOuvert() override;
 };
 
 #endif

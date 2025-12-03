@@ -17,12 +17,4 @@ public:
     virtual void clear() = 0;
 };
 
-
-
-
-
-
-
-
-
 #endif

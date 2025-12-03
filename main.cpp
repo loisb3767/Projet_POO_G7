@@ -1,35 +1,79 @@
-#include "Grille.h"
+#include <iostream>
+#include <vector>
+#include "GridNormal.h"
+#include "GridToric.h"
+#include "CellAlive.h"
+#include "CellDead.h"
+#include "ConwayRules.h"
+#include "Game.h"
+#include "FileManager.h"
 #include "AffichageGraphique.h"
+
+#include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
 int main() {
-    const int largeur = 80;
-    const int hauteur = 80;
-    const int tailleCellule = 10;
+    std::string cheminFichier;
+    std::cout << "Saisir chemin fichier d'entrée : ";
+    std::cin >> cheminFichier;
 
-    Grille grille(largeur, hauteur);
-    grille.initialiser();
-
-    AffichageGraphique affichage(tailleCellule);
-    affichage.init();
-
-    sf::Clock horloge;             
-    const sf::Time intervalle = sf::seconds(3.0f); //1 seconde
-
-    while (affichage.estOuvert()) {
-        if (!affichage.handleInput())   //Gestion évènements
-            break;
-
-        if (horloge.getElapsedTime() >= intervalle) {   //Verification 1 seconde passée
-            grille.initialiser();  // Recrée une nouvelle grille
-            horloge.restart();     // Réinitialise l’horloge
+    try {
+        // --- Charger la grille depuis le fichier ---
+        vector<vector<int>> cellsInt = FileManager::loadFromFile(cheminFichier);
+        int hauteur = cellsInt.size();
+        int largeur = cellsInt[0].size();
+        bool isObstacle = false;
+        // --- Conversion en CellState* ---
+        vector<vector<CellState*>> cells(hauteur, vector<CellState*>(largeur));
+        for (int y = 0; y < hauteur; y++) {
+            for (int x = 0; x < largeur; x++) {
+                if (cellsInt[y][x] == 1)
+                    cells[y][x] = new CellAlive(x, y, isObstacle);
+                else
+                    cells[y][x] = new CellDead(x, y, isObstacle);
+            }
         }
 
-        affichage.clear();      //Rendu
-        affichage.render(&grille);
-    }
-    affichage.close();
+        // --- Créer la grille et le jeu ---
+        Grid* grille = new GridToric(largeur, hauteur, cells);
+        Rules* rules = new ConwayRules();
+        Game game(grille, rules);
 
-    //affichage.close();
+        // --- Choix du mode ---
+        std::string mode;
+        std::cout << "Mode console ou graphique (c/g) ? ";
+        std::cin >> mode;
+
+        if (mode == "c") {
+            int iterations;
+            std::cout << "Nombre d'itérations : ";
+            std::cin >> iterations;
+            for (int i = 0; i < iterations; i++) {
+                game.nextGeneration();
+                FileManager::saveToFile(cheminFichier + "_out" + std::to_string(i+1) + ".txt", game.getGrid());
+            }
+        } else {
+            AffichageGraphique affichage(10);
+            affichage.setGrid(game.getGrid());
+            affichage.init();
+
+            while (affichage.estOuvert()) {
+                if (!affichage.handleInput()) break;
+                game.nextGeneration();
+                affichage.clear();
+                affichage.render(game.getGrid());
+                sf::sleep(sf::milliseconds(20));
+            }
+            affichage.close();
+        }
+
+        // --- Nettoyage mémoire ---
+        delete grille;
+        delete rules;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Erreur : " << e.what() << std::endl;
+    }
+
     return 0;
 }

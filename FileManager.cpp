@@ -2,8 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <filesystem>
 #include <iostream>
-
 
 vector<vector<int>> FileManager::loadFromFile(const string& filename) {
     if (!fileExists(filename)) {
@@ -18,9 +18,14 @@ void FileManager::saveToFile(const string& filename, Grid* grid) {
         throw invalid_argument("La grille ne peut pas être null");
     }
     
-    ofstream file(filename);
+    std::string folder = "out";
+    std::filesystem::create_directories(folder);
+
+    std::string fullPath = folder + "/" + filename;
+
+    ofstream file(fullPath);
     if (!file.is_open()) {
-        throw runtime_error("Impossible d'ouvrir le fichier: " + filename);
+        throw runtime_error("Impossible d'ouvrir le fichier: " + fullPath);
     }
     
     int width = grid->getWidth();
