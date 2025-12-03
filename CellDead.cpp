@@ -18,7 +18,7 @@ int CellDead::getY() const {
 
 CellState* CellDead::nextState(int nbVoisins, Rules* rules) {
     if(!this->isObstacle) {
-        if(!rules->shouldBeBorn(nbVoisins)) {
+        if(rules->shouldBeBorn(nbVoisins)) {
             return new CellAlive(this->x, this->y, this->isObstacle);
         }
     }
@@ -29,4 +29,5 @@ CellState* CellDead::clone() {
 }
 string CellDead::getType() {
     return "CellDead";
+
 }
