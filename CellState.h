@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 class CellState {
 public:
     virtual ~CellState() = default;

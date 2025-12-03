@@ -3,7 +3,6 @@
 
 #include "CellState.h"
 
-
 class CellAlive : public CellState {
 protected:
     int x;

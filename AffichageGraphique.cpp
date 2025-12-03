@@ -7,7 +7,7 @@ AffichageGraphique::AffichageGraphique(int taille)
       couleurMort(sf::Color::White), fenetre(nullptr), grille(nullptr) {}
 
 void AffichageGraphique::init() {
-    fenetre = new sf::RenderWindow(sf::VideoMode(400, 400), "Jeu de la vie - POO G7");
+    fenetre = new sf::RenderWindow(sf::VideoMode(1000, 1000), "Jeu de la vie - POO G7");
 }
 
 void AffichageGraphique::clear() {

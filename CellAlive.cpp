@@ -2,7 +2,6 @@
 #include "CellDead.h"
 #include "ConwayRules.h"
 
-
 CellAlive::CellAlive(int x, int y, bool isObstacle) {
     this->x = x;
     this->y = y;

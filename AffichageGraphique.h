@@ -13,7 +13,6 @@ class AffichageGraphique: public Affichage{
         int tailleCellule;
         sf::Color couleurVivant;
         sf::Color couleurMort;
-        //sf::Color couleurImmortel;
         sf::RenderWindow* fenetre;
         Grid* grille;
     public:

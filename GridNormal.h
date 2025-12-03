@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 class GridNormal : public Grid {
 protected:
     int const width;

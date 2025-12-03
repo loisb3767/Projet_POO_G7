@@ -62,7 +62,7 @@ int main() {
                 game.nextGeneration();
                 affichage.clear();
                 affichage.render(game.getGrid());
-                sf::sleep(sf::milliseconds(200));
+                sf::sleep(sf::milliseconds(80));
             }
             affichage.close();
         }

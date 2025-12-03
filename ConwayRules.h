@@ -3,7 +3,6 @@
 
 #include "Rules.h"
 
-
 class ConwayRules : public Rules {
 public:
     bool shouldBeBorn(int nbVoisins) override;

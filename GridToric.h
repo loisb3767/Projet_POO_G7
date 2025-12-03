@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 class GridToric : public Grid {
 protected:
     int const width;

@@ -3,7 +3,6 @@
 
 #include "CellState.h"
 
-
 class CellDead : public CellState {
 protected:
     int x;
@@ -18,18 +17,5 @@ public:
     CellState* nextState(int nbVoisins, Rules* rules) override;
     CellState* clone() override;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif

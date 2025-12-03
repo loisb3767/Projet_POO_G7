@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 class Rules {
 public:
     virtual ~Rules() = default;

@@ -3,7 +3,6 @@
 
 #include "CellAlive.h"
 
-
 class Grid {
 public:
     virtual ~Grid() = default;

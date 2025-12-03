@@ -4,7 +4,6 @@
 #include "Grid.h"
 #include "Rules.h"
 
-
 class Game {
 private:
     Grid* currentGrid;
