@@ -35,12 +35,12 @@ int main() {
             }
         }
 
-        // --- Créer la grille et le jeu ---
-        Grid* grille = new GridToric(largeur, hauteur, cells);
+        // Créer les règles de Conway, le jeu et le type de Grille (Torique || Normale)
+        Grid* grille = new GridNormal(largeur, hauteur, cells);
         Rules* rules = new ConwayRules();
         Game game(grille, rules);
 
-        // --- Choix du mode ---
+        // Choix mode
         std::string mode;
         std::cout << "Mode console ou graphique (c/g) ? ";
         std::cin >> mode;

@@ -26,6 +26,9 @@ void Game::nextGeneration() {
     int width = currentGrid->getWidth();
     int height = currentGrid->getHeight();
 
+
+    bool hasChanged = false;
+
     // Calculer le nouvel état basé sur currentGrid
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -39,7 +42,9 @@ void Game::nextGeneration() {
             CellState* newCell = currentCell->nextState(nbVoisins, rules);
 
             // Mettre à jour la nouvelle grille
-            if (newCell != currentCell) {
+            if (newCell->getType() != currentCell->getType()) {
+                hasChanged = true;
+
                 delete nextGrid->getCellule(x, y);   // ok, nextGrid a été cloné
                 nextGrid->setCellule(x, y, newCell); // transfer ownership
                 // ne pas delete newCell ici
@@ -47,6 +52,10 @@ void Game::nextGeneration() {
                 delete newCell; // clone() peut retourner un clone identique
             }
         }
+    }
+
+    if (!hasChanged) {
+    throw std::runtime_error("La grille n'évolue plus.");
     }
 
     // Nettoyer l'ancienne grille
