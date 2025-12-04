@@ -23,6 +23,7 @@ int main() {
         int hauteur = cellsInt.size();
         int largeur = cellsInt[0].size();
         bool isObstacle = false;
+        
         // --- Conversion en CellState* ---
         vector<vector<CellState*>> cells(hauteur, vector<CellState*>(largeur));
         for (int y = 0; y < hauteur; y++) {
