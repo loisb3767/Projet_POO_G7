@@ -1,4 +1,5 @@
 #include "GridToric.h"
+#include <stdexcept>
 
 GridToric::GridToric(int w, int h, const vector<vector<CellState*>> &cells)
         : width(w > 0 ? w : throw invalid_argument("Width doit être > 0")),
@@ -79,3 +80,4 @@ void GridToric::clear() {
     }
     cells.clear();
 }
+
