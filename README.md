@@ -47,8 +47,9 @@ Requis :
 Pour compiler vous devrez avoir le compilateur g++, sfml et au minimum la version 17 C++. Pour relier SFML au programme et pour éviter les problèmes de linkage, vous devrez ajouter ces instructions :
 "-lsfml-graphics -lsfml-window -lsfml-system" à la fin de la ligne de compilation.
 Afin de compiler le code du projet vous devrez utiliser cette commande :
+```
 g++ -std=c++17 *.cpp -o jeu -lsfml-graphics -lsfml-window -lsfml-system
-
+```
 
 ## EXECUTION
 Après la compilation lancer le jeu en faisant ./jeu
