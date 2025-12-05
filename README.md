@@ -15,6 +15,9 @@ Pour notre projet de Programmation orientée objet, nous devions par binôme, cr
 Fichier d'entrée : "planeur.txt"
 ```
 20 20
+0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -31,9 +34,6 @@ Fichier d'entrée : "planeur.txt"
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```
 Donc après avoir choisi votre fichier en entrée, vous devez choisir entre deux modes soit le mode graphique qui permet d'afficher le jeu de la vie avec SFML. Ou alors en choisissant le mode console qui permet d'avoir un fichier par itération en sortie dans un dossier out, c'est l'utilisateur qui choisit le nombre d'itérations en mode console.
