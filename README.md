@@ -53,7 +53,7 @@ g++ -std=c++17 *.cpp -o jeu -lsfml-graphics -lsfml-window -lsfml-system
 
 ## EXECUTION
 Après avoir bien installé les différentes dépendances et après avoir compilé vous pourrez lancer le jeu en faisant ./jeu
-Si vous vous trouvez dans le dossier /CODE et que vous voulez utiliser un modèle pour pouvez utiliser le chemin ../Modeles/planeur.txt par exemple.
+Si vous vous trouvez dans le dossier /CODE et que vous voulez utiliser un modèle pour pouvez utiliser un des modèles comme planeur.txt, grand_planeur.txt ou canon.txt par exemple.
 
 
 
