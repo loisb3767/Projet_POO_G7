@@ -42,7 +42,7 @@ int main() {
 
         Grid* grille = nullptr; //Création grille pointeur nul pour le choix de la grille
 
-         et le type de Grille (Torique || Normale)
+        //Choix type de Grille (Torique || Normale)
         if (choix_grille == "t"){
             grille = new GridToric(largeur, hauteur, cells);
         }
@@ -95,4 +95,5 @@ int main() {
 
     return 0;
 }
+
 
