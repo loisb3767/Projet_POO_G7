@@ -1,6 +1,6 @@
 #include "GridFactory.h"
 #include <random>
-
+#include <stdexcept>
 
 Grid* GridFactory::createEmpty(int width, int height, bool toric) {
     vector data(height, vector(width, 0));
@@ -66,3 +66,4 @@ vector<vector<CellState*>> GridFactory::initializeCells(
     
     return cells;
 }
+
