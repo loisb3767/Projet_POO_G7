@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <stdexcept>
 
 Game::Game(Grid* grid, Rules* rules)
     : currentGrid(grid), nextGrid(nullptr), rules(rules), generation(0) {
@@ -109,3 +110,4 @@ void Game::setRules(Rules* newRules) {
     delete rules;
     rules = newRules;
 }
+
