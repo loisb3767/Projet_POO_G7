@@ -74,10 +74,14 @@ int main() {
             AffichageGraphique affichage(10);
             affichage.setGrid(game.getGrid());
             affichage.init();
-
             while (affichage.estOuvert()) {
                 if (!affichage.handleInput()) break;
-                game.nextGeneration();
+                try {
+                    game.nextGeneration();
+                } catch (const std::runtime_error& e) {
+                    std::cout << e.what() << std::endl;
+                    break;
+                }
                 affichage.clear();
                 affichage.render(game.getGrid());
                 sf::sleep(sf::milliseconds(80));
@@ -85,9 +89,6 @@ int main() {
             affichage.close();
         }
 
-        // --- Nettoyage mémoire ---
-        delete grille;
-        delete rules;
 
     } catch (const std::exception& e) {
         std::cerr << "Erreur : " << e.what() << std::endl;
