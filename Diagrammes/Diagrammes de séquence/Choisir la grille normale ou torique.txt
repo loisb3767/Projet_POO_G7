@@ -1,0 +1,25 @@
+---
+config:
+  theme: dark
+---
+sequenceDiagram
+    actor Utilisateur
+    participant Main
+    participant GridNormal
+    participant GridToric
+    Note over Utilisateur,Main: Grille et cellules déjà créées
+    Utilisateur->>Main: Choisir type de grille (normale/torique)
+    alt Type == "normale"
+        Main->>GridNormal: new GridNormal(largeur, hauteur, cells)
+        activate GridNormal
+        GridNormal-->>Main: Grid* grille
+        deactivate GridNormal
+        Note over GridNormal: Grille avec bords fixes
+    else Type == "torique"
+        Main->>GridToric: new GridToric(largeur, hauteur, cells)
+        activate GridToric
+        GridToric-->>Main: Grid* grille
+        deactivate GridToric
+        Note over GridToric: Grille avec bords connectés
+    end
+    Note over Main: Grille prête pour Game
