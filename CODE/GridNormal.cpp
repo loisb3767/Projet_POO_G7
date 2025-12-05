@@ -1,4 +1,5 @@
 #include "GridNormal.h"
+#include <stdexcept>
 
 GridNormal::GridNormal(int w, int h, const vector<vector<CellState*>> &cells)
         : width(w > 0 ? w : throw invalid_argument("Width doit être > 0")),
@@ -70,4 +71,5 @@ void GridNormal::clear() {
     }
     cells.clear();
 }
+
 
