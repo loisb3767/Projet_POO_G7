@@ -48,7 +48,7 @@ Pour compiler vous devrez avoir le compilateur g++, sfml et au minimum la versio
 "-lsfml-graphics -lsfml-window -lsfml-system" à la fin de la ligne de compilation.
 Afin de compiler le code du projet vous devrez utiliser cette commande :
 ```
-g++ -std=c++17 *.cpp -o jeu -lsfml-graphics -lsfml-window -lsfml-system
+g++ -std=c++17 $(ls *.cpp | grep -v test.cpp) -lsfml-graphics -lsfml-window -lsfml-system -o exec
 ```
 
 ## EXECUTION
