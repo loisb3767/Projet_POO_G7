@@ -1,4 +1,4 @@
-# JEU DE LA VIE - PROJET POO G7
+<h1 align="center">JEU DE LA VIE - PROJET POO G7</h1>
 
 
 ## DESCRIPTION :
