@@ -433,6 +433,60 @@ void testGameConstructorNullRules() {
     cout << "  ✓ Rules nullptr lève exception: \"" << message << "\"" << endl;
 }
 
+// Test 12: Game::reset avec Grid nullptr
+void testGameResetNullGrid() {
+    cout << "\n=== Test 12: Game::reset avec Grid nullptr ===" << endl;
+
+    vector<vector<int>> blockData = {
+        {0, 1, 1, 0},
+        {0, 1, 1, 0}
+    };
+
+    Grid* grid = createGridFromData(blockData, false);
+    Rules* rules = new ConwayRules();
+    Game game(grid, rules);
+
+    bool exceptionThrown = false;
+    string message;
+    try {
+        game.reset(nullptr);
+    } catch (const invalid_argument& e) {
+        exceptionThrown = true;
+        message = e.what();
+    }
+
+    assert(exceptionThrown && "reset() devrait lever exception pour Grid nullptr");
+    assert(message == "La nouvelle grille ne peut pas être null" && "Message incorrect");
+    cout << "  ✓ reset(nullptr) lève exception: \"" << message << "\"" << endl;
+}
+
+// Test 13: Game::setRules avec Rules nullptr
+void testGameSetRulesNull() {
+    cout << "\n=== Test 13: Game::setRules avec Rules nullptr ===" << endl;
+
+    vector<vector<int>> blockData = {
+        {0, 1, 1, 0},
+        {0, 1, 1, 0}
+    };
+
+    Grid* grid = createGridFromData(blockData, false);
+    Rules* rules = new ConwayRules();
+    Game game(grid, rules);
+
+    bool exceptionThrown = false;
+    string message;
+    try {
+        game.setRules(nullptr);
+    } catch (const invalid_argument& e) {
+        exceptionThrown = true;
+        message = e.what();
+    }
+
+    assert(exceptionThrown && "setRules() devrait lever exception pour Rules nullptr");
+    assert(message == "Les nouvelles règles ne peuvent pas être null" && "Message incorrect");
+    cout << "  ✓ setRules(nullptr) lève exception: \"" << message << "\"" << endl;
+}
+
 
 int main() {
     cout << "========================================" << endl;
@@ -450,6 +504,8 @@ int main() {
     testGridToricZeroDimensions();
     testGameConstructorNullGrid();
     testGameConstructorNullRules();
+    testGameResetNullGrid();
+    testGameSetRulesNull();
 
 
     cout << "\n========================================" << endl;
