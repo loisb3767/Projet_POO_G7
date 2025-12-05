@@ -13,6 +13,7 @@ Le fonctionnement de l'automate est ancré sur deux règles, à un instant t (po
 Pour notre projet de Programmation orientée objet, nous devions par binôme, créer un jeu de la vie en C++ en respectant les principes de la POO. Nous avons commencé par la partie Conception et Modélisation du projet en utilisant différents diagrammes UML/SYSML (cas d'utilisation, d'activité, de séquence et de classes), que nous avons fournis sur le repo github. Ensuite nous nous sommes repartis les tâches selon notre diagramme de classes fait au préalable. Afin de garantir une gestion propre du projet et éviter les problèmes avec git nous avions fais deux branches, en plus du main. Cela nous a permis de vérifier chacun de notre côté en local que notre code fonctionnait pour ensuite lorsqu'il était prêt et que nous nous étions mis d'accord, push sur la branche main du projet. Dans ce projet nous devions avoir une partie console et une partie graphique, choisi par l'utilisateur lors de l'execution du programme. Les deux modes prennent en entrée un fichier txt avec le format de la grille et l'état des cellules. Voici un modèle de fichier d'entrée : 
 
 Fichier d'entrée : "planeur.txt"
+```
 20 20
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -34,7 +35,7 @@ Fichier d'entrée : "planeur.txt"
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-
+```
 Donc après avoir choisi votre fichier en entrée, vous devez choisir entre deux modes soit le mode graphique qui permet d'afficher le jeu de la vie avec SFML. Ou alors en choisissant le mode console qui permet d'avoir un fichier par itération en sortie dans un dossier out, c'est l'utilisateur qui choisit le nombre d'itérations en mode console.
 
 ## COMPILATION
