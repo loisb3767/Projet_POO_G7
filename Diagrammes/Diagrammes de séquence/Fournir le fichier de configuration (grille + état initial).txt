@@ -1,0 +1,30 @@
+sequenceDiagram
+    actor Utilisateur
+    participant Main
+    participant FileManager
+    participant GridFactory
+    participant GridNormal
+    participant CellAlive
+    participant CellDead
+
+    Utilisateur->>Main: Saisir chemin fichier
+    Main->>FileManager: loadFromFile(cheminFichier)
+    activate FileManager
+    FileManager->>FileManager: parseGridData(content)
+    FileManager-->>Main: vector<vector<int>> cellsInt
+    deactivate FileManager
+    
+    loop Pour chaque cellule
+        alt cellsInt[y][x] == 1
+            Main->>CellAlive: new CellAlive(x, y, isObstacle)
+            CellAlive-->>Main: CellState*
+        else cellsInt[y][x] == 0
+            Main->>CellDead: new CellDead(x, y, isObstacle)
+            CellDead-->>Main: CellState*
+        end
+    end
+    
+    Main->>GridNormal: new GridNormal(largeur, hauteur, cells)
+    activate GridNormal
+    GridNormal-->>Main: Grid* grille
+    deactivate GridNormal

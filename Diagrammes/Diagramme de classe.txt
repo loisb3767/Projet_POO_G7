@@ -1,0 +1,152 @@
+---
+config:
+  theme: dark
+  layout: dagre
+---
+classDiagram
+    class CellState {
+        <<abstract>>
+        +getX() int
+        +getY() int
+        +getType() string
+        +nextState(nbVoisins: int, rules: Rules*) CellState*
+        +clone() CellState*
+    }
+
+    class Grid {
+        <<abstract>>
+        +getWidth() int
+        +getHeight() int
+        +getCellule(x: int, y: int) CellState*
+        +setCellule(x: int, y: int, state: CellState*)
+        +countVoisinsAlive(x: int, y: int) int
+        +updateCell(x: int, y: int, rules: Rules*)
+        +clone() Grid*
+        +clear()
+    }
+
+    class Rules {
+        <<abstract>>
+        +shouldBeBorn(nbVoisins: int) bool
+        +shouldSurvive(nbVoisins: int) bool
+        +getName() string
+    }
+    class CellAlive {
+        -int x
+        -int y
+        -bool isObstacle
+        +CellAlive(x: int, y: int, isObstacle: bool)
+        +getX() int
+        +getY() int
+        +getType() string
+        +nextState(nbVoisins: int, rules: Rules*) CellState*
+        +clone() CellState*
+    }
+
+    class CellDead {
+        -int x
+        -int y
+        -bool isObstacle
+        +CellDead(x: int, y: int, isObstacle: bool)
+        +getX() int
+        +getY() int
+        +getType() string
+        +nextState(nbVoisins: int, rules: Rules*) CellState*
+        +clone() CellState*
+    }
+    class GridNormal {
+        -int width
+        -int height
+        -vector~vector~CellState*~~ cells
+        +GridNormal(width: int, height: int, cells: vector)
+        +getWidth() int
+        +getHeight() int
+        +getCellule(x: int, y: int) CellState*
+        +setCellule(x: int, y: int, state: CellState*)
+        +countVoisinsAlive(x: int, y: int) int
+        +updateCell(x: int, y: int, rules: Rules*)
+        +clone() Grid*
+        +clear()
+    }
+
+    class GridToric {
+        -int width
+        -int height
+        -vector~vector~CellState*~~ cells
+        +GridToric(width: int, height: int, cells: vector)
+        +getWidth() int
+        +getHeight() int
+        +getCellule(x: int, y: int) CellState*
+        +setCellule(x: int, y: int, state: CellState*)
+        +countVoisinsAlive(x: int, y: int) int
+        +updateCell(x: int, y: int, rules: Rules*)
+        +clone() Grid*
+        +clear()
+    }
+    class ConwayRules {
+        +shouldBeBorn(nbVoisins: int) bool
+        +shouldSurvive(nbVoisins: int) bool
+        +getName() string
+    }
+    class Game {
+        -Grid* currentGrid
+        -Grid* nextGrid
+        -Rules* rules
+        -int generation
+        +Game(grid: Grid*, rules: Rules*)
+        +nextGeneration()
+        +run(iterations: int)
+        +getGrid() Grid*
+        +getRules() Rules*
+        +getGeneration() int
+        +reset(newGrid: Grid*)
+        +setRules(newRules: Rules*)
+    }
+    class GridFactory {
+        <<static>>
+        +createEmpty(width: int, height: int, toric: bool)$ Grid*
+        +createFromMatrix(width: int, height: int, data: vector, toric: bool)$ Grid*
+        +createRandom(width: int, height: int, density: double, toric: bool)$ Grid*
+        -initializeCells(width: int, height: int, data: vector)$ vector
+    }
+    class FileManager {
+        <<static>>
+        +loadFromFile(filename: string)$ vector~vector~int~~
+        +saveToFile(filename: string, grid: Grid*)$
+        -parseGridData(content: string)$ vector~vector~int~~
+        -gridToString(grid: Grid*)$ string
+    }
+    class AffichageGraphique {
+        -int tailleCellule
+        -sf::Color couleurVivant
+        -sf::Color couleurMort
+        -sf::RenderWindow* fenetre
+        -Grid* grille
+        +AffichageGraphique(taille: int)
+        +init()
+        +clear()
+        +setGrid(g: Grid*)
+        +render(g: Grid*)
+        +close()
+        +handleInput() bool
+        +estOuvert() bool
+    }
+    CellState <|-- CellAlive
+    CellState <|-- CellDead
+    Grid <|-- GridNormal
+    Grid <|-- GridToric
+    Rules <|-- ConwayRules
+    Game o-- Grid : currentGrid
+    Game o-- Grid : nextGrid
+    Game o-- Rules : rules
+    GridNormal *-- CellState : cells
+    GridToric *-- CellState : cells
+    AffichageGraphique o-- Grid : grille
+    GridFactory ..> Grid : creates
+    GridFactory ..> GridNormal : creates
+    GridFactory ..> GridToric : creates
+    GridFactory ..> CellAlive : creates
+    GridFactory ..> CellDead : creates
+    FileManager ..> Grid : uses
+    CellState ..> Rules : uses
+    Grid ..> Rules : uses

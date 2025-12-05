@@ -1,0 +1,45 @@
+sequenceDiagram
+    actor Utilisateur
+    participant Main
+    participant Game
+    participant Grid
+    participant CellState
+    participant Rules
+    participant FileManager
+    
+    Utilisateur->>Main: Lancer simulation (mode console)
+    
+    loop Pour chaque itération
+        Main->>Game: nextGeneration()
+        activate Game
+        Game->>Game: nextGrid = currentGrid->clone()
+        
+        loop Pour chaque cellule (y, x)
+            Game->>Grid: updateCell(x, y, rules)
+            activate Grid
+            Grid->>Grid: countVoisinsAlive(x, y)
+            Grid->>CellState: nextState(nbVoisins, rules)
+            activate CellState
+            CellState->>Rules: shouldBeBorn(nbVoisins)
+            Rules-->>CellState: bool
+            CellState->>Rules: shouldSurvive(nbVoisins)
+            Rules-->>CellState: bool
+            CellState-->>Grid: CellState* newCell
+            deactivate CellState
+            Grid->>Grid: setCellule(x, y, newCell)
+            deactivate Grid
+        end
+        
+        Game->>Game: delete currentGrid
+        Game->>Game: currentGrid = nextGrid
+        Game->>Game: generation++
+        deactivate Game
+        
+        Main->>Game: getGrid()
+        Game-->>Main: Grid*
+        Main->>FileManager: saveToFile(filename, grid)
+        activate FileManager
+        FileManager->>FileManager: gridToString(grid)
+        FileManager->>FileManager: Écrire dans fichier
+        deactivate FileManager
+    end

@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor Utilisateur
+    participant Main
+    participant Game
+    participant ConwayRules
+    
+    Main->>ConwayRules: new ConwayRules()
+    ConwayRules-->>Main: Rules*
+    
+    Main->>Game: new Game(grille, rules)
+    activate Game
+    Game->>Game: currentGrid = grid->clone()
+    Game->>Game: generation = 0
+    Game-->>Main: Game instance
+    deactivate Game
+    
+    Utilisateur->>Main: Choisir mode (c/g)
+    
+    alt Mode == "c"
+        Main->>Main: Mode console activé
+        Utilisateur->>Main: Saisir nombre d'itérations
+    else Mode == "g"
+        Main->>Main: Mode graphique activé
+    end

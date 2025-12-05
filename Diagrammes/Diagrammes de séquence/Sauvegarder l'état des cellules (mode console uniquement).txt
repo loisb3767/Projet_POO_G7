@@ -1,0 +1,45 @@
+sequenceDiagram
+    actor Utilisateur
+    participant Main
+    participant Game
+    participant FileManager
+    participant Grid
+    participant CellState
+    
+    Note over Main: Après chaque itération
+    
+    Main->>Game: getGrid()
+    activate Game
+    Game-->>Main: Grid* currentGrid
+    deactivate Game
+    
+    Main->>FileManager: saveToFile(filename, grid)
+    activate FileManager
+    FileManager->>FileManager: gridToString(grid)
+    activate FileManager
+    
+    loop Pour chaque ligne y
+        loop Pour chaque colonne x
+            FileManager->>Grid: getCellule(x, y)
+            Grid-->>FileManager: CellState*
+            FileManager->>CellState: getType()
+            alt Type == "CellAlive"
+                CellState-->>FileManager: "CellAlive"
+                FileManager->>FileManager: Ajouter "1" à la chaîne
+            else Type == "CellDead"
+                CellState-->>FileManager: "CellDead"
+                FileManager->>FileManager: Ajouter "0" à la chaîne
+            end
+        end
+        FileManager->>FileManager: Ajouter saut de ligne
+    end
+    
+    FileManager-->>FileManager: string contenu
+    deactivate FileManager
+    
+    FileManager->>FileManager: Ouvrir fichier en écriture
+    FileManager->>FileManager: Écrire contenu dans fichier
+    FileManager->>FileManager: Fermer fichier
+    deactivate FileManager
+    
+    Note over Utilisateur: Fichier sauvegardé avec<br/>pattern: nom_outN.txt

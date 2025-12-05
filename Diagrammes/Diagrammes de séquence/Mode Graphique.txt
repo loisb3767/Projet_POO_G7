@@ -1,0 +1,65 @@
+sequenceDiagram
+    actor Utilisateur
+    participant Main
+    participant AffichageGraphique
+    participant Game
+    participant Grid
+    participant sf::RenderWindow
+    
+    Main->>AffichageGraphique: new AffichageGraphique(10)
+    Main->>Game: getGrid()
+    Game-->>Main: Grid*
+    Main->>AffichageGraphique: setGrid(grid)
+    Main->>AffichageGraphique: init()
+    activate AffichageGraphique
+    AffichageGraphique->>sf::RenderWindow: new RenderWindow(1000, 1000)
+    deactivate AffichageGraphique
+    
+    loop Tant que fenêtre ouverte
+        Main->>AffichageGraphique: estOuvert()
+        AffichageGraphique-->>Main: bool
+        
+        Main->>AffichageGraphique: handleInput()
+        activate AffichageGraphique
+        AffichageGraphique->>sf::RenderWindow: pollEvent(event)
+        alt Event::Closed
+            AffichageGraphique-->>Main: false
+        else Continuer
+            AffichageGraphique-->>Main: true
+        end
+        deactivate AffichageGraphique
+        
+        Main->>Game: nextGeneration()
+        activate Game
+        Game->>Game: Calculer nouvelle génération
+        deactivate Game
+        
+        Main->>AffichageGraphique: clear()
+        activate AffichageGraphique
+        AffichageGraphique->>sf::RenderWindow: clear(couleurMort)
+        deactivate AffichageGraphique
+        
+        Main->>Game: getGrid()
+        Game-->>Main: Grid*
+        Main->>AffichageGraphique: render(grid)
+        activate AffichageGraphique
+        loop Pour chaque cellule
+            AffichageGraphique->>Grid: getCellule(x, y)
+            Grid-->>AffichageGraphique: CellState*
+            AffichageGraphique->>CellState: getType()
+            alt Type == "CellAlive"
+                AffichageGraphique->>sf::RenderWindow: draw(cellule)
+            end
+        end
+        AffichageGraphique->>sf::RenderWindow: display()
+        deactivate AffichageGraphique
+        
+        Main->>Main: sf::sleep(80ms)
+    end
+    
+    Utilisateur->>AffichageGraphique: Fermer fenêtre
+    Main->>AffichageGraphique: close()
+    activate AffichageGraphique
+    AffichageGraphique->>sf::RenderWindow: close()
+    AffichageGraphique->>sf::RenderWindow: delete fenetre
+    deactivate AffichageGraphique
