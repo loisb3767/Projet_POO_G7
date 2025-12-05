@@ -35,8 +35,25 @@ int main() {
             }
         }
 
-        // Créer les règles de Conway, le jeu et le type de Grille (Torique || Normale)
-        Grid* grille = new GridNormal(largeur, hauteur, cells);
+        // Choix grille (Torique ou Normale)
+        std::string choix_grille;
+        std::cout << "Grille torique ou normale (t/n) ? ";
+        std::cin >> choix_grille;
+
+        Grid* grille = nullptr; //Création grille pointeur nul pour le choix de la grille
+
+         et le type de Grille (Torique || Normale)
+        if (choix_grille == "t"){
+            grille = new GridToric(largeur, hauteur, cells);
+        }
+        else if (choix_grille == "n"){
+            grille = new GridNormal(largeur, hauteur, cells);
+        } else{
+            std::cout << "Choix de grille non valide";
+            return 1; //stop si choix pas compatible
+        }
+
+        // Créer les règles de Conway, le jeu
         Rules* rules = new ConwayRules();
         Game game(grille, rules);
 
@@ -78,3 +95,4 @@ int main() {
 
     return 0;
 }
+
