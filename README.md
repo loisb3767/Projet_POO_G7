@@ -52,7 +52,7 @@ g++ -std=c++17 *.cpp -o jeu -lsfml-graphics -lsfml-window -lsfml-system
 ```
 
 ## EXECUTION
-Après la compilation lancer le jeu en faisant ./jeu
+Après avoir bien installé les différentes dépendances et après avoir compilé vous pourrez lancer le jeu en faisant ./jeu
 
 
 
