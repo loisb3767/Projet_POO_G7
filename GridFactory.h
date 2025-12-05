@@ -1,8 +1,8 @@
 #ifndef GRIDFACTORY_H
 #define GRIDFACTORY_H
 
-#include <string>
 #include <vector>
+#include <random>
 #include "Grid.h"
 #include "GridNormal.h"
 #include "GridToric.h"
@@ -14,21 +14,17 @@ using namespace std;
 
 class GridFactory {
 public:
-    // Crée une grille vide (toutes cellules mortes)
+    // Input: int (largeur), int (hauteur), bool (torique) | Output: Grid* (grille vide)
     static Grid* createEmpty(int width, int height, bool toric);
-    
-    // Crée une grille à partir d'une matrice de données
-    static Grid* createFromMatrix(int width, int height, 
-                                   const vector<vector<int>>& data, 
-                                   bool toric);
-    
-    // Crée une grille aléatoire avec une densité donnée
+    // Input: int (largeur), int (hauteur), vector<vector<int>> (données), bool (torique) | Output: Grid* (grille initialisée)
+    static Grid* createFromMatrix(int width, int height, const vector<vector<int>>& data, bool toric);
+    // Input: int (largeur), int (hauteur), double (densité), bool (torique) | Output: Grid* (grille aléatoire)
     static Grid* createRandom(int width, int height, double density, bool toric);
 
 private:
-    // Méthode helper pour initialiser la matrice de cellules
+    // Input: int (largeur), int (hauteur), vector<vector<int>> (données) | Output: vector<vector<CellState*>> (matrice de cellules)
     static vector<vector<CellState*>> initializeCells(
-        int width, int height, 
+        int width, int height,
         const vector<vector<int>>& data);
 };
 

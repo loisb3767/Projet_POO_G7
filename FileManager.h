@@ -8,22 +8,18 @@
 
 class FileManager {
 public:
-    // Charge une grille depuis un fichier texte
-    // Format: première ligne = largeur hauteur
-    // Lignes suivantes: 0 (mort), 1 (vivant)
-    static vector<vector<int>> loadFromFile(const string& filename);
-    
-    // Sauvegarde une grille dans un fichier texte
-    static void saveToFile(const string& filename, Grid* grid);
-    
-    // Charge les dimensions depuis un fichier
+    // Input: string (nom du fichier) | Output: pair<int, int> (largeur, hauteur)
     static pair<int, int> getDimensions(const string& filename);
 
+    // Input: string (nom du fichier) | Output: vector<vector<int>> (matrice de données chargées)
+    static vector<vector<int>> loadFromFile(const string& filename);
+    // Input: string (nom du fichier), Grid* (grille à sauvegarder) | Output: aucun (void, sauvegarde dans fichier)
+    static void saveToFile(const string& filename, Grid* grid);
+
 private:
-    // Parse un fichier au format texte simple
+    // Input: string (nom du fichier) | Output: vector<vector<int>> (données parsées)
     static vector<vector<int>> parseTXT(const string& filename);
-    
-    // Vérifie si le fichier existe
+    // Input: string (nom du fichier) | Output: bool (true si le fichier existe)
     static bool fileExists(const string& filename);
 };
 
